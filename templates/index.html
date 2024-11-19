@@ -1,0 +1,173 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <!-- site metas -->
+    <title>Avodha shopping</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/bootstrap.min.css'%}" />
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/style.css'%}" />
+    <!-- Responsive-->
+    <link rel="stylesheet" href="{% static 'home/css/responsive.css'%}" />
+    <!-- fevicon -->
+    <link rel="icon" href="{% static 'home/images/fevicon.png'%}" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="{% static 'home/css/jquery.mCustomScrollbar.min.css'%}" />
+    <!-- Tweaks for older IEs-->
+    <link
+      rel="stylesheet"
+      href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+    />
+    <!-- owl stylesheets -->
+    <link rel="stylesheet" href="{% static 'home/css/owl.carousel.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'home/css/owl.theme.default.min.css'%}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+      media="screen"
+    />
+  </head>
+  <body>
+   
+    <!-- banner section start -->
+     
+    <div class="banner_section layout_padding" >
+      <div class="container" >
+        <div id="main_slider" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active"> <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="/">All</a></li>
+                {% for i in ct %}
+                <a href={{i.get_url}}>{{i.name}}</a><br>
+                {% endfor %}
+              </ul>
+            
+              <div class="row" >
+                <div class="col-sm-12">
+                  <div class="banner_taital">
+                    <h1 class="outstanding_text">Avodha shop</h1>
+                    <h1 class="coffee_text">QUALITY FOOD <br>ITEMS</h1>
+                    <p class="there_text">
+                      There are many variations of passages of Lorem Ipsum
+                      available, but the majority have suffered alteration in
+                      some form, by injected humour,
+                    </p>
+                    
+                  </div>
+                </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+         
+          <a
+            class="carousel-control-prev"
+            href="#main_slider"
+            role="button"
+            data-slide="prev"
+          >
+            <i class="fa fa-angle-left"></i>
+          </a>
+          <a
+            class="carousel-control-next"
+            href="#main_slider"
+            role="button"
+            data-slide="next"
+          >
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- about section end -->
+    <!-- gallery section start -->
+    
+    <div class="gallery_section layout_padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h1 class="gallery_taital">Our Gallery</h1>
+            <p class="gallery_text">
+              Lorem Ipsum is simply dummy text of printing typesetting ststry
+              lorem Ipsum the industry'ndard dummy text ever since of the 1500s,
+              when an unknown printer took a galley of type and scra make a type
+              specimen book. It has
+            </p>
+          </div>
+        </div>
+       
+          <div class="gallery_section_2">
+            <div class="row">
+              {% for i in pr %}
+              <div class="col-md-4">
+                <div class="container_main">
+                  
+                  <img src="{{i.img.url}}" alt="Avatar" class="image" style="width: 300px;height: 300px;"/>
+                  <div class="overlay">
+                    <div class="text">
+                      <a href="{{i.get_url}}"
+                        ><i class="fa fa-search" aria-hidden="true"></i
+                      ></a>
+                      
+                    </div>
+                   
+                  </div>
+                </div>
+                <h1>{{i.name}}</h1>
+                <p class="p">{{i.desc|truncatewords:17}}</p>
+                <p>price:{{i.price}}Rs</p>
+                <p>stock:{{i.stock}}</p>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="pagination"> 
+            <span class="step-links"> 
+              {% if pr.has_previous %}
+               <a href="?page=1">&laquo; first</a> 
+               <a href="?page={{ pr.previous_page_number }}">previous</a> 
+              {% endif %} 
+               <span class="current">
+                 Page {{ pr.number }} of {{ pr.paginator.num_pages }}.
+               </span> 
+               {% if pr.has_next %} 
+               <a href="?page={{ pr.next_page_number }}">next</a>
+                <a href="?page={{ pr.paginator.num_pages }}">last &raquo;</a>
+               {% endif %} 
+            </span> 
+          </div>
+    <!-- copyright section end -->
+    <!-- Javascript files-->
+    <script src="{% static 'home/js/jquery.min.js'%}"></script>
+    <script src="{% static 'home/js/popper.min.js'%}"></script>
+    <script src="{% static 'home/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'home/js/jquery-3.0.0.min.js'%}"></script>
+    <script src="{% static 'home/js/plugin.js'%}"></script>
+    <!-- sidebar -->
+    <script src="{% static 'home/js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+    <script src="{% static 'home/js/custom.js'%}"></script>
+  </body>
+</html>
+{% endblock %}
