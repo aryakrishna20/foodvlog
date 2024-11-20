@@ -40,6 +40,42 @@
       media="screen"
     />
   </head>
+  <style>
+    .pagination-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin-top: 1150px; /* Add spacing from the content */
+   padding-right: 120px;
+}
+
+.pagination {
+    display: flex;
+    gap: 10px; /* Space between pagination links */
+}
+
+.pagination a {
+    text-decoration: none;
+    color: #007bff; /* Blue color for links */
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #f1f1f1; /* Highlight effect on hover */
+}
+
+.pagination .current {
+    font-weight: bold;
+    color: white;
+    background-color: #007bff; /* Highlight the current page */
+    border: 1px solid #007bff;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+  </style>
   <body>
    
     <!-- banner section start -->
@@ -124,7 +160,7 @@
               <div class="col-md-4">
                 <div class="container_main">
                   
-                  <img src="{{i.img.url}}" alt="Avatar" class="image" style="width: 300px;height: 300px;"/>
+                  <a href="{{i.get_url}}"><img src="{{i.img.url}}" alt="Avatar" class="image" style="width: 300px;height: 300px;"/></a>
                   <div class="overlay">
                     <div class="text">
                       <a href="{{i.get_url}}"
@@ -143,21 +179,26 @@
               {% endfor %}
             </div>
           </div>
-          <div class="pagination"> 
-            <span class="step-links"> 
-              {% if pr.has_previous %}
-               <a href="?page=1">&laquo; first</a> 
-               <a href="?page={{ pr.previous_page_number }}">previous</a> 
-              {% endif %} 
-               <span class="current">
-                 Page {{ pr.number }} of {{ pr.paginator.num_pages }}.
-               </span> 
-               {% if pr.has_next %} 
-               <a href="?page={{ pr.next_page_number }}">next</a>
-                <a href="?page={{ pr.paginator.num_pages }}">last &raquo;</a>
-               {% endif %} 
-            </span> 
-          </div>
+          <div class="pagination-container">
+            <div class="pagination">
+                {% if pr.has_previous %}
+                    <a href="?page=1">First</a>
+                    <a href="?page={{ pr.previous_page_number }}">Previous</a>
+                {% endif %}
+                {% for num in pr.paginator.page_range %}
+                    {% if pr.number == num %}
+                        <span class="current">{{ num }}</span>
+                    {% else %}
+                        <a href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if pr.has_next %}
+                    <a href="?page={{ pr.next_page_number }}">Next</a>
+                    <a href="?page={{ pr.paginator.num_pages }}">Last</a>
+                {% endif %}
+            </div>
+        </div>
+        
     <!-- copyright section end -->
     <!-- Javascript files-->
     <script src="{% static 'home/js/jquery.min.js'%}"></script>
